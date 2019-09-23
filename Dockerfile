@@ -50,8 +50,6 @@ RUN yum install -y yum-utils gettext hostname && \
 # Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH
 COPY ./s2i/bin/ $STI_SCRIPTS_PATH
 
-# Copy extra files to the image.
-COPY ./root/ /
 #copy default nginx configuration
 COPY ./nginx/default.conf ${NGINX_CONF_PATH}
 COPY ./nginx/default.conf ${NGINX_DEFAULT_CONF_PATH}
