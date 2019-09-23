@@ -18,8 +18,11 @@ RUN useradd -u 1001 -r -g 0 -d ${HOME} -s /sbin/nologin -c "NGINX default user" 
     && mkdir -p ${HOME} \
     && chown -R 1001:0 ${HOME} && chmod -R g+rwX ${HOME}
 
+USER 1001
+WORKDIR ${HOME}
+
 #copy default nginx configuration
-COPY ./nginx/.conf /usr/share/nginx/html/
+COPY ./nginx/.conf /usr/share/nginx/html
 
 #set default expose port
 EXPOSE 8888
