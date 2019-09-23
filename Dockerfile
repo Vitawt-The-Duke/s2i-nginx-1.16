@@ -1,30 +1,26 @@
-FROM nginx:1.16.0-alpine
+FROM nginx:stable-alpine
 
-#set variables
-#ENV HOME=/opt/rh/nginx16/root/etc/nginx
-#
+# support running as arbitrary user which belogs to the root group
+RUN chmod g+rwx /var/cache/nginx /var/run /var/log/nginx /usr/libexec/s2i
+RUN chgrp -R root /var/cache/nginx
 
-#openshift lbles
-LABEL io.k8s.description="nginx-alpine-1.16" \
-      io.k8s.display-name="OpenShift nginx-alpine-1.16" \
+RUN addgroup nginx root
+USER nginx
+
+#openshift lables
+LABEL io.k8s.description="nginx-stable-alpine" \
+      io.k8s.display-name="OpenShift nginx-stable-alpine" \
       io.openshift.s2i.scripts-url="image:///usr/libexec/s2i" \
       io.openshift.expose-services="8888:http" \
       io.openshift.tags="builder,Nginx,webserver,html"
 
 #copy s2i files
 COPY ./s2i/bin/ /usr/libexec/s2i
-
-#creating user and set permissions
-#RUN useradd -u 1001 -r -g 0 -d ${HOME} -s /sbin/nologin -c "NGINX default user" default \
-#    && mkdir -p ${HOME} \
-#    && chown -R 1001:0 ${HOME} && chmod -R g+rwX ${HOME}
-#
-USER 1001
-#WORKDIR ${HOME}
+USER nginx
+WORKDIR /tmp 
 
 #copy default nginx configuration
-COPY ./nginx/default.conf /etc/nginx/conf.d
-COPY ./nginx/default.conf /etc/nginx/conf.d
+COPY ./nginx/default.conf /etc/nginx/sites-enabled
 
 #set default expose port
 EXPOSE 8888
