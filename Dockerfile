@@ -1,7 +1,7 @@
 FROM centos/nginx-16-centos7
 
 #set variables
-ENV HOME=/usr/share/nginx/
+ENV HOME=/opt/rh/nginx16/root/etc/nginx
 #
 
 #openshift lbles
@@ -23,7 +23,7 @@ USER 1001
 WORKDIR ${HOME}
 
 #copy default nginx configuration
-COPY ./nginx/default.conf /usr/share/nginx/html
+COPY ./nginx/default.conf ${HOME}/cond.d
 
 #set default expose port
 EXPOSE 8888
