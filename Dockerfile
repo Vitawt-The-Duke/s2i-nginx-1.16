@@ -15,12 +15,12 @@ LABEL io.k8s.description="nginx-alpine-1.16" \
 COPY ./s2i/bin/ /usr/libexec/s2i
 
 #creating user and set permissions
-RUN useradd -u 1001 -r -g 0 -d ${HOME} -s /sbin/nologin -c "NGINX default user" default \
-    && mkdir -p ${HOME} \
-    && chown -R 1001:0 ${HOME} && chmod -R g+rwX ${HOME}
-
+#RUN useradd -u 1001 -r -g 0 -d ${HOME} -s /sbin/nologin -c "NGINX default user" default \
+#    && mkdir -p ${HOME} \
+#    && chown -R 1001:0 ${HOME} && chmod -R g+rwX ${HOME}
+#
 USER 1001
-WORKDIR ${HOME}
+#WORKDIR ${HOME}
 
 #copy default nginx configuration
 COPY ./nginx/default.conf /etc/nginx/conf.d
