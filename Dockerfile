@@ -1,5 +1,7 @@
 FROM nginx:stable-alpine
 
+#copy s2i files
+COPY ./s2i/bin/ /usr/libexec/s2i
 # support running as arbitrary user which belogs to the root group
 RUN chmod g+rwx /var/cache/nginx /var/run /var/log/nginx /usr/libexec/s2i
 RUN chgrp -R root /var/cache/nginx
@@ -14,8 +16,7 @@ LABEL io.k8s.description="nginx-stable-alpine" \
       io.openshift.expose-services="8888:http" \
       io.openshift.tags="builder,Nginx,webserver,html"
 
-#copy s2i files
-COPY ./s2i/bin/ /usr/libexec/s2i
+
 USER nginx
 WORKDIR /tmp 
 
