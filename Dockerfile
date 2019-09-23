@@ -1,12 +1,12 @@
-FROM centos/nginx-16-centos7
+FROM nginx:1.16.0-alpine
 
 #set variables
-ENV HOME=/opt/rh/nginx16/root/etc/nginx
+#ENV HOME=/opt/rh/nginx16/root/etc/nginx
 #
 
 #openshift lbles
-LABEL io.k8s.description="nginx-centos7-1.16" \
-      io.k8s.display-name="OpenShift nginx-centos7-1.16" \
+LABEL io.k8s.description="nginx-alpine-1.16" \
+      io.k8s.display-name="OpenShift nginx-alpine-1.16" \
       io.openshift.s2i.scripts-url="image:///usr/libexec/s2i" \
       io.openshift.expose-services="8888:http" \
       io.openshift.tags="builder,Nginx,webserver,html"
@@ -23,7 +23,8 @@ USER 1001
 WORKDIR ${HOME}
 
 #copy default nginx configuration
-COPY ./nginx/default.conf ${HOME}/conf.d
+COPY ./nginx/default.conf /etc/nginx/conf.d
+COPY ./nginx/default.conf /etc/nginx/conf.d
 
 #set default expose port
 EXPOSE 8888
