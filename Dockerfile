@@ -23,7 +23,7 @@ USER 1001
 WORKDIR ${HOME}
 
 #copy default nginx configuration
-COPY ./nginx/default.conf ${HOME}/cond.d
+COPY ./nginx/default.conf ${HOME}/conf.d
 
 #set default expose port
 EXPOSE 8888
