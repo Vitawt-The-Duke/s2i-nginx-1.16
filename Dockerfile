@@ -2,6 +2,7 @@ FROM centos/nginx-16-centos7
 
 #set variables
 HOME /usr/share/nginx/
+#
 
 #openshift lbles
 LABEL io.k8s.description="nginx-centos7-1.16" \
