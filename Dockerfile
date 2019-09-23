@@ -1,7 +1,7 @@
 FROM centos/nginx-16-centos7
 
 #set variables
-HOME /usr/share/nginx/
+ENV HOME=/usr/share/nginx/
 #
 
 #openshift lbles
