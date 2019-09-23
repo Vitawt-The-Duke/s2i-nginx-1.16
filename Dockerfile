@@ -51,9 +51,9 @@ RUN yum install -y yum-utils gettext hostname && \
 COPY ./s2i/bin/ $STI_SCRIPTS_PATH
 
 #copy default nginx configuration
-COPY ./nginx/default.conf ${NGINX_CONF_PATH}
-COPY ./nginx/default.conf ${NGINX_DEFAULT_CONF_PATH}
-COPY ./nginx/default.conf ${NGINX_CONFIGURATION_PATH}
+COPY ./nginx/default.conf ${NGINX_CONF_PATH}/
+COPY ./nginx/default.conf ${NGINX_DEFAULT_CONF_PATH}/
+COPY ./nginx/default.conf ${NGINX_CONFIGURATION_PATH}/
 
 # In order to drop the root user, we have to make some directories world
 # writeable as OpenShift default security model is to run the container under
